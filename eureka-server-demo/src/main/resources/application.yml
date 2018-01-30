@@ -1,2 +1,30 @@
+spring:
+  application:
+    name: Eureka-Server-Demo #Eureka Server的名字
+
+---  #配置项分隔符
+spring:
+  profiles: peer1
 server:
-  port: 8761
+  port: 8761 #Eureka Server服务端口
+eureka:
+  client:
+    register-with-eureka: true #表示是否将自己注册到Eureka Server，当前只作为server所以不注册。默认为true
+    fetch-registry: true #表示是否从其他Eureka Server获取注册数据，这在。默认为true
+    service-url:
+      defaultZone: http://peer2:8762/eureka/ #与Eureka Server的交互地址，比如服务注册，服务获取
+  instance:
+    prefer-ip-address: true
+    hostname: peer1
+
+---  #配置项分隔符
+spring:
+  profiles: peer2
+server:
+  port: 8762
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:8761/eureka/
+  instance:
+    hostname: peer2
