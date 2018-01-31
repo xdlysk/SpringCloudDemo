@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: Consumer-Demo
+server:
+  port: 9004
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/
+  instance:
+    prefer-ip-address: true
+#添加以下配置
+Rest-Demo: #服务提供者名字，要和调用地址里的名字大小写完全一致
+  ribbon:
+    NFLoadBalancerRuleClassName: com.xdlysk.consumerdemo.MyLoadBalanceRule
