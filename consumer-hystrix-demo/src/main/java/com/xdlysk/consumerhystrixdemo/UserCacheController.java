@@ -12,18 +12,13 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class UserCacheController {
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
     @Autowired
     private RestTemplate restTemplate;
 
     @CacheResult //指定调用该请求时建立缓存
     @HystrixCommand(commandKey = "findByName" /*命令key，用于缓存移除*/,fallbackMethod = "findByNameFallback")
     @GetMapping("/usercache/{name}")
-    @HystrixProperty(name = "execution.isolation.strategy",value = "THREAD/SEMAPHORE")
+    @HystrixProperty(name = "execution.isolation.strategy",value = "THREAD")
     public UserInfo get(@PathVariable @CacheKey("name")/*缓存key*/ String name){
         return this.restTemplate.getForObject("http://localhost:9000/user/"+name,UserInfo.class);
     }

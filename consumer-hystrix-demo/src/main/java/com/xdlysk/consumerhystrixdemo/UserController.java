@@ -15,16 +15,11 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class UserController {
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+
 
     @Autowired
     private RestTemplate restTemplate;
 
-    @CacheResult
-    @HystrixCollapser(batchMethod = "findByNameFallback")
     @HystrixCommand(fallbackMethod = "findByNameFallback")
     @GetMapping("/user/{name}")
     public UserInfo get(@PathVariable String name){
