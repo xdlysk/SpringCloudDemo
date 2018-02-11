@@ -1,0 +1,15 @@
+encrypt:
+  key-store:
+    password: xdlysk
+    alias: mytestkey
+    secret: xdlysk
+    location: classpath:/server.jks
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+management:
+  security:
+    enabled: false

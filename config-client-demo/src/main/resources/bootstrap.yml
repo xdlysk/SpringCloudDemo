@@ -1,0 +1,21 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  application:
+    name: config-client-demo
+  cloud:
+    config:
+      discovery: #使用服务发现找到Config Server
+        enabled: true
+        service-id: config-server-demo
+      profile: dev
+      label: master
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/
+  instance:
+    prefer-ip-address: true

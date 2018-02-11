@@ -1,0 +1,21 @@
+server:
+  port: 9007
+spring:
+  application:
+    name: config-server-demo
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/xdlysk/SpringConfigRepo #git仓库地址(这里地址故意写错)
+          username: #git仓库用户名
+          password: #git仓库密码
+          repos:
+            test-client: #仓库别名
+              pattern: config-client*,others* #对application name的模式匹配
+              uri: https://github.com/xdlysk/SpringConfigRepo #当匹配到{pattern}时，使用该uri的仓库
+              search-paths: test-client,subdir* #如果在当前仓库的根目录搜索不到，则在这里搜索
+              username: #git仓库用户名
+              password:
+        encrypt:
+          enabled: false
