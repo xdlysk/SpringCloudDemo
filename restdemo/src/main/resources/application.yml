@@ -10,3 +10,12 @@ logging:
   level:
     org.springframework.web.servlet.DispatcherServlet: DEBUG
     org.springframework.cloud.sleuth: DEBUG
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  sleuth:
+    sampler:
+      percentage: 1 #采样率，测试环境建议100%采集，以免由于采不到数据引起误解
